@@ -8,9 +8,8 @@
 #
 case node['platform']
 when 'debian', 'ubuntu'
-  # Added dist-upgrade just because
   execute 'do_update_machine_deb' do
-    command 'apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade'
+    command 'apt-get update && apt-get -y upgrade'
   end
 when 'rhel', 'centos', 'fedora'
   execute 'do_update_machine_rh' do

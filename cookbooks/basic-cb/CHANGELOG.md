@@ -3,6 +3,10 @@ basic-cb CHANGELOG
 
 This file is used to list changes made in each version of the basic cookbook.
 
+0.1.1
+-----
+- [nollieheel] - Remove dist-upgrade call that seems to be causing problems.
+
 0.1.0
 -----
 - [nollieheel] - Initial version of basic-cb.
