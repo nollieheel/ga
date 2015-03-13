@@ -3,6 +3,10 @@ basic-cb CHANGELOG
 
 This file is used to list changes made in each version of the basic cookbook.
 
+0.1.2
+-----
+- [nollieheel] - Add a reboot directive if a reboot is necessary (debian only). Bumped git version dependency.
+
 0.1.1
 -----
 - [nollieheel] - Remove dist-upgrade call that seems to be causing problems.
