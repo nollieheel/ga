@@ -52,7 +52,6 @@ define :drupal_module,
       mods.each do |m|
         execute "drush_en_module_#{m}" do
           command "#{drush} en #{m}"
-          notifies :run, "execute[#{drush} updatedb]", :delayed
           not_if "#{drush} pm-list | grep '(#{m})' | grep -i 'enabled'"
         end
       end
@@ -67,9 +66,5 @@ define :drupal_module,
 
   else
     raise("Unknown parameter '#{params[:action]}' as action")
-  end
-
-  execute "#{drush} updatedb" do
-    action :nothing
   end
 end
