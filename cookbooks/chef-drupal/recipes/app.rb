@@ -72,3 +72,5 @@ drupal_module 'disable_starting_drupal_modules' do
   mods node['chef-drupal']['disable_modules']
   action :disable
 end
+
+execute "#{drush} -r #{doc_root} php-eval 'node_access_rebuild();'"
