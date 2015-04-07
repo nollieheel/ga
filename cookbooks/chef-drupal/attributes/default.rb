@@ -51,3 +51,6 @@ default['chef-drupal']['db']['port'] = '3306'
 default['chef-drupal']['db']['name'] = 'drupal'
 default['chef-drupal']['db']['user'] = 'drupaluser'
 default['chef-drupal']['db']['pass'] = 'secretpassword'
+
+default['chef-drupal']['cron']['freq']   = ['0', '*', '*', '*', '*']
+default['chef-drupal']['cron']['mailto'] = 'root@localhost'
