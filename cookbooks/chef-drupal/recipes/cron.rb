@@ -23,22 +23,22 @@ include_recipe 'cron'
 drush = "#{node['chef-drupal']['drush']['inst_dir']}/drush -y "\
         "-r #{node['chef-drupal']['install']['doc_root']}"
 
-Chef::Log.info('Disable Drupal automated cron (cron_safe_threshold=0).')
+Chef::Log.info('Disable Drupal automated cron (cron_safe_threshold=0)')
 execute 'disable_drupal_automated_cron' do
   command "#{drush} vset cron_safe_threshold 0"
 end
 
-Chef::Log.info('Create crontab entry for Drupal cron jobs.')
+Chef::Log.info('Create crontab entry for Drupal cron jobs')
 cron_file = ::File.join(node['chef-drupal']['install']['doc_root'], 'cron.php')
 freq = node['chef-drupal']['cron']['freq']
 
 cron 'drupal_hourly_cron' do
   command "#{drush} core-cron"
-  minute freq[0]
-  hour freq[1]
-  day freq[2]
-  month freq[3]
+  minute  freq[0]
+  hour    freq[1]
+  day     freq[2]
+  month   freq[3]
   weekday freq[4]
-  mailto node['chef-drupal']['cron']['mailto']
+  mailto  node['chef-drupal']['cron']['mailto']
   only_if { ::File.exist?(cron_file) }
 end

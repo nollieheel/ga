@@ -19,8 +19,10 @@
 #
 
 define :drupal_module, 
-  :dir => nil, :version => nil, 
-  :action => :enable, :mods => ['_'] do
+       :dir     => nil,
+       :version => nil, 
+       :action  => :enable,
+       :mods => ['_'] do
 
   if params[:dir].nil?
     Chef::Log.error('drupal_module requires a working drupal dir')

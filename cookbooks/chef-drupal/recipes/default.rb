@@ -1,7 +1,7 @@
 #
 # Author:: nollieheel
 # Cookbook Name:: chef-drupal
-# Recipe:: drush
+# Recipe:: default
 #
 # Copyright 2015, nollieheel (iskitingbords@gmail.com)
 #
@@ -18,30 +18,5 @@
 # limitations under the License.
 #
 
-include_recipe 'tar'
-
-vars = node['chef-drupal']
-
-directory vars['drush']['inst_dir'] do
-  owner     'root'
-  group     'root'
-  mode      0755
-  recursive true
-end
-
-full_url = "#{vars['drush']['base_url']}/"\
-           "drush-#{vars['drush']['version']}.tar.gz"
-
-tar_extract full_url do
-  target_dir    vars['drush']['inst_dir']
-  compress_char 'z'
-  tar_flags     ['--strip-components 1']
-  creates       "#{vars['drush']['inst_dir']}/drush"
-  user          'root'
-  group         'root'
-end
-
-link "#{vars['drush']['bin_dir']}/drush" do
-  to        "#{vars['drush']['inst_dir']}/drush"
-  link_type :symbolic
-end
+include_recipe "#{cookbook_name}::app"
+include_recipe "#{cookbook_name}::cron"

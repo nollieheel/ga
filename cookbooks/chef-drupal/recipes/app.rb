@@ -20,9 +20,14 @@
 
 include_recipe "#{cookbook_name}::drush"
 
-drush = "#{node['chef-drupal']['drush']['inst_dir']}/drush -y"
 doc_root = node['chef-drupal']['install']['doc_root']
-parent_dir = ::File.dirname(doc_root)
+user     = node['chef-drupal']['install']['user']
+group    = node['chef-drupal']['install']['group']
+ruser    = node['chef-drupal']['install']['readonly_user']
+rgroup   = node['chef-drupal']['install']['readonly_group']
+
+drush        = "#{node['chef-drupal']['drush']['inst_dir']}/drush -y"
+parent_dir   = ::File.dirname(doc_root)
 project_name = ::File.basename(doc_root)
 
 directory parent_dir do
@@ -30,12 +35,12 @@ directory parent_dir do
 end
 
 execute 'download-drupal' do
-  cwd parent_dir
+  cwd     parent_dir
   command "#{drush} dl drupal-#{node['chef-drupal']['version']} "\
           "--destination=#{parent_dir} "\
           "--drupal-project-rename='#{project_name}'"
-  not_if "#{drush}/drush -r #{doc_root} status "\
-         "| grep #{node['chef-drupal']['version']}"
+  not_if  "#{drush}/drush -r #{doc_root} status "\
+          "| grep #{node['chef-drupal']['version']}"
 end
 
 if node['chef-drupal']['site_install']
@@ -56,9 +61,9 @@ end
 node['chef-drupal']['enable_modules'].each do |m|
   if m.is_a?(Hash)
     drupal_module m[:mod] do
-      dir doc_root
+      dir     doc_root
+      mods    m[:en]
       version m[:version]
-      mods m[:en]
     end
   else
     drupal_module m do
@@ -68,9 +73,23 @@ node['chef-drupal']['enable_modules'].each do |m|
 end
 
 drupal_module 'disable_starting_drupal_modules' do
-  dir doc_root
-  mods node['chef-drupal']['disable_modules']
+  dir    doc_root
+  mods   node['chef-drupal']['disable_modules']
   action :disable
 end
 
 execute "#{drush} -r #{doc_root} php-eval 'node_access_rebuild();'"
+
+directory "#{doc_root}/sites/default/private" do
+  recursive true
+end
+
+execute 'main_http_files_permission' do
+  command  "chown -R #{ruser}:#{rgroup} #{doc_root}"
+  notifies :run, 'execute[sites_default_files_permission]', :delayed
+end
+
+execute 'sites_default_files_permission' do
+  command "chown -R #{user}:#{group} #{doc_root}/sites/default/files"
+  action  :nothing
+end

@@ -18,16 +18,20 @@
 # limitations under the License.
 #
 
-default['chef-drupal']['drush']['version'] = '7.x-5.9'
+default['chef-drupal']['drush']['version']  = '7.x-5.9'
 default['chef-drupal']['drush']['inst_dir'] = '/usr/local/drush'
-default['chef-drupal']['drush']['base_url'] = 'http://ftp.drupal.org/files/projects/'
-default['chef-drupal']['drush']['bin_dir'] = '/usr/local/bin'
+default['chef-drupal']['drush']['base_url'] = 'http://ftp.drupal.org/files/projects'
+default['chef-drupal']['drush']['bin_dir']  = '/usr/local/bin'
 
 default['chef-drupal']['version'] = '7.34'
 
-default['chef-drupal']['install']['user'] = 'www-data'
-default['chef-drupal']['install']['group'] = 'www-data'
+# user and group will be applied only to <doc_root>/sites/default/files.
+default['chef-drupal']['install']['user']     = 'www-data'
+default['chef-drupal']['install']['group']    = 'www-data'
 default['chef-drupal']['install']['doc_root'] = '/var/www/drupal'
+# User and Group for the rest of the http files.
+default['chef-drupal']['install']['readonly_user']  = 'root'
+default['chef-drupal']['install']['readonly_group'] = 'root'
 
 # Set this to 'false' if you don't want 'drush site-install' performed.
 default['chef-drupal']['site_install'] = {
@@ -46,7 +50,7 @@ default['chef-drupal']['enable_modules'] = [
 ]
 default['chef-drupal']['disable_modules'] = []
 
-default['chef-drupal']['db']['host'] = '127.0.0.1'
+default['chef-drupal']['db']['host'] = 'localhost'
 default['chef-drupal']['db']['port'] = '3306'
 default['chef-drupal']['db']['name'] = 'drupal'
 default['chef-drupal']['db']['user'] = 'drupaluser'
