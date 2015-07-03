@@ -72,13 +72,14 @@ default['chef-zabbix']['server']['log_file']        = '/var/log/zabbix/zabbix_se
 default['chef-zabbix']['server']['log_file_size']   = '0'
 default['chef-zabbix']['server']['advanced_params'] = {}
 
-default['chef-zabbix']['agent']['listen_port']           = '10050'
-default['chef-zabbix']['agent']['hostname']              = 'Zabbix Server'
-default['chef-zabbix']['agent']['server_ip']             = '127.0.0.1'
-default['chef-zabbix']['agent']['enable_active_checks']  = true
-default['chef-zabbix']['agent']['refresh_active_checks'] = 120
-default['chef-zabbix']['agent']['advanced_params']       = {}
-default['chef-zabbix']['agent']['user_params']           = {}
+default['chef-zabbix']['agent']['listen_port']            = '10050'
+default['chef-zabbix']['agent']['hostname']               = 'Zabbix Server'
+default['chef-zabbix']['agent']['server_ip']              = '127.0.0.1'
+default['chef-zabbix']['agent']['enable_active_checks']   = true
+default['chef-zabbix']['agent']['refresh_active_checks']  = 120
+default['chef-zabbix']['agent']['enable_remote_commands'] = '0'
+default['chef-zabbix']['agent']['advanced_params']        = {}
+default['chef-zabbix']['agent']['user_params']            = {}
 
 default['chef-zabbix']['etc']['apache_name'] =
   value_for_platform_family(

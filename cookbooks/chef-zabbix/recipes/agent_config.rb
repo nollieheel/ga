@@ -29,12 +29,13 @@ template "#{zagentdir}/zabbix_agentd.conf" do
   notifies :restart, "service[#{zagentd}]"
 
   variables(
-    :server_ip             => aagent['server_ip'],
-    :listen_port           => aagent['listen_port'],
-    :enable_active_checks  => aagent['enable_active_checks'],
-    :hostname              => aagent['hostname'],
-    :refresh_active_checks => aagent['refresh_active_checks'],
-    :advanced_params       => aagent['advanced_params'],
-    :user_params           => aagent['user_params']
+    :server_ip              => aagent['server_ip'],
+    :listen_port            => aagent['listen_port'],
+    :enable_active_checks   => aagent['enable_active_checks'],
+    :hostname               => aagent['hostname'],
+    :refresh_active_checks  => aagent['refresh_active_checks'],
+    :enable_remote_commands => aagent['enable_remote_commands'],
+    :advanced_params        => aagent['advanced_params'],
+    :user_params            => aagent['user_params']
   )
 end
