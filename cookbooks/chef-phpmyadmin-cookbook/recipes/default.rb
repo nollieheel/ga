@@ -25,7 +25,7 @@ var = node['phpmyadmin']
 doc_root = var['install']['doc_root']
 url      = var['base_url']
 ver      = var['version']
-full_url = "#{url}/#{ver}/phpMyAdmin-#{ver}-english.tar.gz/download"
+full_url = "#{url}/#{ver}/phpMyAdmin-#{ver}-english.tar.gz"
 id_file  = "#{doc_root}/RELEASE-DATE-#{ver}"
 
 directory doc_root do
