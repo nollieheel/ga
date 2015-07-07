@@ -18,9 +18,8 @@
 # limitations under the License.
 #
 
-default['phpmyadmin']['version'] = '4.4.1'
-default['phpmyadmin']['base_url'] =
-  'http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin'
+default['phpmyadmin']['version']  = '4.4.11'
+default['phpmyadmin']['base_url'] = 'https://files.phpmyadmin.net/phpMyAdmin'
 
 default['phpmyadmin']['install']['doc_root']       = '/var/www/pma'
 default['phpmyadmin']['install']['readonly_user']  = 'root'
